@@ -1,0 +1,27 @@
+.sidenav {
+  position: sticky;
+  box-sizing: border-box;
+  top: 0;
+  padding: 48px 32px;
+  height: 100vh;
+  width: 92px;
+  background-color: var(--color-dark-gray);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .navlist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidenav__item {
+    color: white;
+  }
+}
