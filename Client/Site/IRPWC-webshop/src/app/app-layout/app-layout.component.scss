@@ -16,12 +16,6 @@
 .app-layout__background {
   position: absolute;
   inset: 0px;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.95),
-      rgba(255, 255, 255, 0.95),
-      rgba(255, 255, 255, 1)
-    ),
-    url("../../assets/great-wave.jpg");
   background-position: center center;
   background-size: cover;
   height: 100vh;
