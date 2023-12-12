@@ -17,6 +17,8 @@ import java.util.UUID;
 @RequestMapping(value = "/api/v1/product")
 @RequiredArgsConstructor
 public class ProductController {
+    // TODO: MAKE USE OF DTOS AND MAPPERS ETC
+
     private final ProductDao productDao;
 
     @PostMapping(value = "/create")
@@ -24,7 +26,7 @@ public class ProductController {
         try {
             Product product = new ObjectMapper().readValue(productStr, Product.class);
             product.setImage(imageFile.getBytes());
-            return this.productDao.createProduct(product);
+            return new ResponseEntity<>(this.productDao.createProduct(product), HttpStatus.CREATED);
         }
         catch (Exception e) {
             return new ResponseEntity<>("Product creation failed", HttpStatus.BAD_REQUEST);

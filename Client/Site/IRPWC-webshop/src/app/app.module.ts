@@ -10,6 +10,7 @@ import {
   BrowserAnimationsModule,
   NoopAnimationsModule,
 } from '@angular/platform-browser/animations';
+import { ApiService } from './shared/service/api.service';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ToastrModule } from 'ngx-toastr';
@@ -30,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     ToastrModule.forRoot(),
     HttpClientModule,
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, ApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

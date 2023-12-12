@@ -10,4 +10,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app-layout.component.scss',
   imports: [CommonModule, NavbarComponent, RouterOutlet],
 })
-export class AppLayoutComponent {}
+export class AppLayoutComponent {
+
+}
