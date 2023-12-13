@@ -1,13 +1,26 @@
 .container {
-  padding-top: 25px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
 
-  h1 {
-    font-size: 2.5rem;
+  .h1_container {
     display: flex;
-    justify-content: center;
-    color: #C3B2C7FF;
+    margin: 4rem 0;
+
+    h1 {
+      font-size: 40px;
+      color: #000000;
+      margin: auto;
+    }
+  }
+
+  .image-container {
+    display: flex;
+    width: 100vw;
+    height: 30%;
+    background: url("../../assets/pexels-roman-odintsov-5855789.jpg") no-repeat center;
+    background-size: cover;
   }
 
 }
-
-
