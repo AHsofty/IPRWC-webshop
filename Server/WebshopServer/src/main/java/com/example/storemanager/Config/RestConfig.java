@@ -13,6 +13,7 @@ public class RestConfig {
 
     @Bean
     public CorsFilter corsFilter() {
+        // TODO: Make this more secure
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
