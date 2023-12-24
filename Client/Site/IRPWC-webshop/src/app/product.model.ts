@@ -1,3 +1,5 @@
+import {SafeResourceUrl} from "@angular/platform-browser";
+
 export class Product {
   constructor(
     public productName: string,
@@ -6,6 +8,6 @@ export class Product {
     public quantity: number,
     public description: string,
     public image: string,
-    public id?: number
+    public id: string,
   ) {}
 }

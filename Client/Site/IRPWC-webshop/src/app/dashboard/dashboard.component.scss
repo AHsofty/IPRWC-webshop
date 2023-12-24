@@ -1,10 +1,16 @@
 .container {
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-  .h1_container {
+.items {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.h1_container {
     display: flex;
     margin: 4rem 0;
 
@@ -13,14 +19,13 @@
       color: #000000;
       margin: auto;
     }
-  }
+}
 
-  .image-container {
+.image-container {
     display: flex;
     width: 100vw;
-    height: 30%;
+    height: 200px;
     background: url("../../assets/pexels-roman-odintsov-5855789.jpg") no-repeat center;
     background-size: cover;
   }
 
-}

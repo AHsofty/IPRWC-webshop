@@ -5,4 +5,16 @@
 
   <div class="image-container">
   </div>
+
+  <div class="items">
+    <app-item-card *ngFor="let item of products"
+                   [productName]="item.productName"
+                   [productBuyPrice]="item.buyPrice"
+                   [productSellPrice]="item.sellPrice"
+                   [productImage]="item.image"
+                   [productDescription]="item.description"
+                   [productID]="item.id"
+                   [productQuantity]="item.quantity"
+    ></app-item-card>
+  </div>
 </div>

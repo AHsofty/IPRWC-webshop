@@ -18,7 +18,7 @@
       <label for="description">Description</label>
       <input type="text" id="description" name="description" [(ngModel)]="description" placeholder="Description of the product">
 
-      <input type="file" id="docpicker" name="docpicker" accept=".jpg,.jpeg.png" [(ngModel)]="image" #docpicker/>
+      <input type="file" id="docpicker" name="docpicker" accept=".jpg,.jpeg,.png" [(ngModel)]="image" #docpicker/>
 
       <input type="button" value="Submit" (click)="onSubmitClick()">
     </form>
