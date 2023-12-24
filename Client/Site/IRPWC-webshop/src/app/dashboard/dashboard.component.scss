@@ -1,16 +1,9 @@
 .container {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+  align-items: center;
+  flex-direction: column;
 
-.items {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.h1_container {
+  .h1_container {
     display: flex;
     margin: 4rem 0;
 
@@ -19,9 +12,9 @@
       color: #000000;
       margin: auto;
     }
-}
+  }
 
-.image-container {
+  .image-container {
     display: flex;
     width: 100vw;
     height: 200px;
@@ -29,3 +22,4 @@
     background-size: cover;
   }
 
+}
