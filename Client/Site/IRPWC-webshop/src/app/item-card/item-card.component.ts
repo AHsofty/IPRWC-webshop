@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -18,5 +19,9 @@ export class ItemCardComponent {
   @Input() productBuyPrice: number = 0;
   @Input() productQuantity: number = 0;
 
+  constructor(private router: Router) {}
 
+  onViewClick() {
+    this.router.navigate(['/product', this.productID])
+  }
 }
