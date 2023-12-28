@@ -1,3 +1,49 @@
-.image_container {
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid black;
+
+
+  .image_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    flex-direction: column;
+  }
+
+  .image_container > img{
+    width: 60%;
+    height: auto;
+  }
+
+  .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    flex-direction: column;
+  }
+  .text > p {
+    font-family: "Droid Sans";
+    font-size: 1.3rem;
+  }
+
+  button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+
 
 }
+

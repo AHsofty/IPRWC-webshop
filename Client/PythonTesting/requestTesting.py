@@ -49,7 +49,7 @@ def get_all_products():
 
 def get_product(UUID):
 	url = f'http://localhost:8080/api/v1/product/{UUID}'
-	r = requests.get(url)	
+	r = requests.get(url)
 	return r.content
 
 def save_image(jsonbody):

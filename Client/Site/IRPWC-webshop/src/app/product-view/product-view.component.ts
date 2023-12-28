@@ -13,11 +13,13 @@ import {Subscription} from "rxjs";
   styleUrl: './product-view.component.scss'
 })
 export class ProductViewComponent {
-  private product: Product | undefined = undefined;
-
+  public product: Product | undefined = undefined;
 
   private uuid: string = "";
   private routeSub: Subscription = new Subscription();
+
+  public backgroundImageSting: string = "";
+
   constructor(private apiService: ApiService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -37,8 +39,18 @@ export class ProductViewComponent {
           , payload.quantity
           , payload.description
           , payload.image);
+
+        this.backgroundImageSting = "data:image/jpg;base64," + this.product?.image;
+
       }});
+
+
 
   }
 
+  protected readonly undefined = undefined;
+
+  addToCart(product: Product | undefined) {
+
+  }
 }

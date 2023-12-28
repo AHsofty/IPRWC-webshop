@@ -1,6 +1,10 @@
 <div class="container">
   <div class="image_container">
-
+    <img src="{{backgroundImageSting}}" alt="Image of the product">
   </div>
-  <p>Testing text</p>
+  <div class="text">
+    <p>{{product?.productName}} - ${{product?.sellPrice}}</p>
+    <p>{{product?.description}}</p>
+  </div>
+  <button (click)="addToCart(product)">Add to cart</button>
 </div>
