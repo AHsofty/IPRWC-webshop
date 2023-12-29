@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import {CreateitemsComponent} from "./createitems/createitems.component";
 import {ProductViewComponent} from "./product-view/product-view.component";
+import {CartComponent} from "./cart/cart.component";
 
 
 export const routes: Routes = [
@@ -27,7 +28,12 @@ export const routes: Routes = [
       {
         path: 'product/:id',
         component: ProductViewComponent,
+      },
+      {
+        path: 'cart',
+        component: CartComponent
       }
+
     ],
   },
 ];
