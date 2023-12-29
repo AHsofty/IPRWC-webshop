@@ -4,6 +4,7 @@ import {Product} from "../product.model";
 import {ApiService} from "../shared/service/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
+import {CartService} from "../shared/service/cart.service";
 
 @Component({
   selector: 'app-product-view',
@@ -20,7 +21,7 @@ export class ProductViewComponent {
 
   public backgroundImageSting: string = "";
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, cart: CartService) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
@@ -44,13 +45,13 @@ export class ProductViewComponent {
 
       }});
 
-
-
   }
 
   protected readonly undefined = undefined;
 
   addToCart(product: Product | undefined) {
-
+    if (product != undefined) {
+      CartService.add(product);
+    }
   }
 }
