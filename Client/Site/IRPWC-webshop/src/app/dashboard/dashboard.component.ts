@@ -31,7 +31,6 @@ export class DashboardComponent {
 
           let localProducts: Product[] = [];
           for (let product of this.products) {
-            console.log(product.image);
             product.image = ('data:image/jpg;base64,' + product.image);
             localProducts.push(product);
           }
