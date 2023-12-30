@@ -5,9 +5,14 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 import {CreateitemsComponent} from "./createitems/createitems.component";
 import {ProductViewComponent} from "./product-view/product-view.component";
 import {CartComponent} from "./cart/cart.component";
+import {LoginComponent} from "./login/login.component";
 
 
 export const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   {
     path: '',
     component: AppLayoutComponent,
