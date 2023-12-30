@@ -11,5 +11,17 @@ import {Product} from "../product.model";
 })
 export class CartItemComponent {
   @Input() product: Product | undefined;
+  public imageString: string = ""
+
+  ngOnInit() {
+    this.setImageString();
+  }
+
+  setImageString() {
+    this.imageString = "data:image/jpg;base64," + this.product?.image;
+    console.log(this.imageString)
+  }
+
+
 
 }

@@ -1,7 +1,11 @@
 <div class="container">
-  <div class="card-container">
+  <div class="lef_side">
     <app-cart-item *ngFor="let item of CartService.items"
                    [product]="item">
     </app-cart-item>
+  </div>
+
+  <div class="buy_button">
+    <button class="btn" (click)="CartService.clear()">Clear all items</button>
   </div>
 </div>
