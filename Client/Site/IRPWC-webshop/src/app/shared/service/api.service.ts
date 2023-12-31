@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {z} from 'zod';
 import {Injectable} from '@angular/core';
 import {map, Observable, tap} from 'rxjs';
@@ -13,7 +13,9 @@ export class ApiService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   addProduct(formData: FormData): Observable<any> {
-    return this.http.post(`${API_URL}/product/create`, formData, {responseType: 'text', observe: 'response'});
+    let token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(`${API_URL}/product/create`, formData, {responseType: 'text', observe: 'response', headers: headers});
   }
 
   getAllProducts(): Observable<Product[]> {
