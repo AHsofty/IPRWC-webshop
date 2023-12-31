@@ -10,6 +10,7 @@ import {loginGuard} from "./shared/guard/login.guard";
 import {authGuard} from "./shared/guard/auth.guard";
 import {RegisterComponent} from "./register/register.component";
 import {adminGuard} from "./shared/guard/admin.guard";
+import {LogoutComponent} from "./logout/logout.component";
 
 
 export const routes: Routes = [
@@ -48,6 +49,11 @@ export const routes: Routes = [
       {
         path: 'cart',
         component: CartComponent
+      },
+      {
+        path: 'logout',
+        component: LogoutComponent,
+        canActivate: [authGuard],
       }
 
     ],
