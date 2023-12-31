@@ -78,11 +78,11 @@ def add_by_id(id, amount, token):
     print(r.text)
 
 
-def login():
+def login(username, password):
     url = "http://localhost:8080/api/v1/auth/login"
     payload = {
-        "username": "admin",
-        "password": "admin"
+        "username": username,
+        "password": password
     }
     r = requests.post(url, json=payload)
     response_str = r.content.decode('utf-8')
@@ -90,7 +90,22 @@ def login():
     token = response_json['payload']['token']
     return token
 
+def register(username, password):
 
-x = login()
-y = add_product(x)
+    url = "http://localhost:8080/api/v1/user/register"
+    payload = {
+          "username" : username,
+          "password" : password
+    }
+    r = requests.post(url, json=payload)
+    print(r)
+    print(r.content)
+
+
+# x = register("Eren", "Hallo123")
+
+
+x = login("Eren", "Hallo123")
+print(x)
+# y = add_product(x)
 

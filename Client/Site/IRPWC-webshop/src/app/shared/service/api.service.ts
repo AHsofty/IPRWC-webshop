@@ -56,6 +56,21 @@ export class ApiService {
         })
       );
     }
+
+
+  PostRegister(payload: { username: string; password: string }) {
+    return this.http.post(`${API_URL}/user/register`, payload).pipe(
+      map((data) => {
+        return z
+          .object({
+            payload: z.object({
+              token: z.string(),
+            }),
+          })
+          .parse(data);
+      }),
+    );
+  }
 }
 
 

@@ -39,8 +39,7 @@ public class UserController {
         return new ApiResponse<>(res);
     }
 
-    @PreAuthorize("hasAuthority('SUPERADMIN')")
-    @PostMapping
+    @PostMapping(value = "/register")
     public ApiResponse<AuthResponseDTO> register(@RequestBody AuthRequestDTO loginDTO) {
         Optional<String> tokenResponse = authenticationService.register(loginDTO.getUsername(), loginDTO.getPassword());
 
