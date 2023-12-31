@@ -5,9 +5,25 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 import {CreateitemsComponent} from "./createitems/createitems.component";
 import {ProductViewComponent} from "./product-view/product-view.component";
 import {CartComponent} from "./cart/cart.component";
+import {LoginComponent} from "./login/login.component";
+import {loginGuard} from "./shared/guard/login.guard";
+import {authGuard} from "./shared/guard/auth.guard";
+import {RegisterComponent} from "./register/register.component";
+import {adminGuard} from "./shared/guard/admin.guard";
+import {LogoutComponent} from "./logout/logout.component";
 
 
 export const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [loginGuard],
+  },
   {
     path: '',
     component: AppLayoutComponent,
@@ -24,6 +40,7 @@ export const routes: Routes = [
       {
         path: 'create',
         component: CreateitemsComponent,
+        canActivate: [adminGuard],
       },
       {
         path: 'product/:id',
@@ -32,6 +49,11 @@ export const routes: Routes = [
       {
         path: 'cart',
         component: CartComponent
+      },
+      {
+        path: 'logout',
+        component: LogoutComponent,
+        canActivate: [authGuard],
       }
 
     ],

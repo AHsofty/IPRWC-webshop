@@ -1,24 +1,29 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {z} from 'zod';
 import {Injectable} from '@angular/core';
-import {map, Observable} from 'rxjs';
+import {map, Observable, tap} from 'rxjs';
 import {Product} from "../../product.model";
+import {AuthService} from "./auth.service";
+
+const API_URL = 'http://localhost:8080/api/v1';
+
 
 @Injectable()
 export class ApiService {
-  API_URL = 'http://localhost:8080/api/v1';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   addProduct(formData: FormData): Observable<any> {
-    return this.http.post(`${this.API_URL}/product/create`, formData, {responseType: 'text', observe: 'response'});
+    let token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(`${API_URL}/product/create`, formData, {responseType: 'text', observe: 'response', headers: headers});
   }
 
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.API_URL}/product/all`);
+    return this.http.get<Product[]>(`${API_URL}/product/all`);
   }
 
   getProductById(id: string): Observable<any> {
-    return this.http.get<Product>(`${this.API_URL}/product/${id}`).pipe(
+    return this.http.get<Product>(`${API_URL}/product/${id}`).pipe(
       map(data => {
         if (data === null || data === undefined) {
           throw new Error('Product not found');
@@ -37,6 +42,37 @@ export class ApiService {
   }
 
 
+    PostLogin(payload: { password: string; username: string }) {
+      return this.http.post(`${API_URL}/auth/login`, payload).pipe(
+        map((data) => {
+          return z
+            .object({
+              payload: z.object({
+                token: z.string(),
+              }),
+            })
+            .parse(data);
+        }),
+        tap((data) => {
+          this.authService.setToken(data.payload.token);
+        })
+      );
+    }
+
+
+  PostRegister(payload: { username: string; password: string }) {
+    return this.http.post(`${API_URL}/user/register`, payload).pipe(
+      map((data) => {
+        return z
+          .object({
+            payload: z.object({
+              token: z.string(),
+            }),
+          })
+          .parse(data);
+      }),
+    );
+  }
 }
 
 
