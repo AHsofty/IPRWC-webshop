@@ -6,12 +6,15 @@ import {CreateitemsComponent} from "./createitems/createitems.component";
 import {ProductViewComponent} from "./product-view/product-view.component";
 import {CartComponent} from "./cart/cart.component";
 import {LoginComponent} from "./login/login.component";
+import {loginGuard} from "./shared/guard/login.guard";
+import {authGuard} from "./shared/guard/auth.guard";
 
 
 export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [loginGuard],
   },
   {
     path: '',
@@ -29,6 +32,7 @@ export const routes: Routes = [
       {
         path: 'create',
         component: CreateitemsComponent,
+        canActivate: [authGuard],
       },
       {
         path: 'product/:id',

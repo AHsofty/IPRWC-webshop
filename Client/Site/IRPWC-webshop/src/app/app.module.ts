@@ -16,6 +16,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import {CartService} from "./shared/service/cart.service";
+import {AuthService} from "./shared/service/auth.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +33,7 @@ import {CartService} from "./shared/service/cart.service";
     ToastrModule.forRoot(),
     HttpClientModule,
   ],
-  providers: [HttpClientModule, ApiService, CartService],
+  providers: [HttpClientModule, ApiService, CartService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
