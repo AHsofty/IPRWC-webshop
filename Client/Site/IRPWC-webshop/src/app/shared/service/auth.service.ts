@@ -24,7 +24,7 @@ export class AuthService {
     if (!token) return false;
 
     const claims = this.parseToken(token);
-    if (claims.role !== 'ADMIN' || claims.role !== 'SUPERADMIN') return false;
+    if (claims.role !== 'ADMIN' && claims.role !== 'SUPERADMIN') return false;
 
     return true;
   }

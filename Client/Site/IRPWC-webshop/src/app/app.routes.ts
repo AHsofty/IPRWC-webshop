@@ -9,6 +9,7 @@ import {LoginComponent} from "./login/login.component";
 import {loginGuard} from "./shared/guard/login.guard";
 import {authGuard} from "./shared/guard/auth.guard";
 import {RegisterComponent} from "./register/register.component";
+import {adminGuard} from "./shared/guard/admin.guard";
 
 
 export const routes: Routes = [
@@ -38,7 +39,7 @@ export const routes: Routes = [
       {
         path: 'create',
         component: CreateitemsComponent,
-        canActivate: [authGuard],
+        canActivate: [adminGuard],
       },
       {
         path: 'product/:id',
