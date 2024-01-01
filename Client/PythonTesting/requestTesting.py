@@ -125,9 +125,9 @@ def add_product_v2(token):
 
     headers = {'Authorization': f'Bearer {token}'}
     response = requests.post(url, files=files, headers=headers)
-    # response = requests.post(url, files=files)
     print(response)
     print(response.text)
+
 
 
 x = login("admin", "admin")
