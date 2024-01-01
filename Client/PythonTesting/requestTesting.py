@@ -142,6 +142,12 @@ def get_image_by_id_v2(UUID):
     print(r.content)
     return r 
 
+def get_all_products_v2():
+    url = 'http://localhost:8080/api/v2/product/all'
+    r = requests.get(url)	
+    print(r)
+    print(r.content)
+     
 
 
 # x = login("admin", "admin")
@@ -150,3 +156,5 @@ def get_image_by_id_v2(UUID):
 # get_product_by_id_v2("8d0cea24-adc6-4466-98fa-5f0d1505460f")
 
 # get_image_by_id_v2("2d31e68a-ade1-48f0-a5dd-c5cd519ea7cc")
+
+get_all_products_v2()

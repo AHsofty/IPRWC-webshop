@@ -51,7 +51,7 @@ public class ProductControllerV2 {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @GetMapping()
+    @GetMapping(value = "/all")
     private ResponseEntity<?> getAllProducts() {
         return new ResponseEntity<>(this.productDao.findAll(), HttpStatus.OK);
     }

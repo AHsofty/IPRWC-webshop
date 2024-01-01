@@ -61,7 +61,7 @@ public class SpringConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/product/create", "/api/v2/product/create").authenticated()
-                        .requestMatchers("/api/v1/product/all", "/api/v1/product/{id}", "/api/v1/user/register", "/api/v2/product/{id}").permitAll()
+                        .requestMatchers("/api/v1/product/all", "/api/v1/product/{id}", "/api/v1/user/register", "/api/v2/product/{id}", "/api/v2/product/all").permitAll()
                         .requestMatchers("/api/v2/image/**").permitAll()
                         .anyRequest().authenticated()
                 )
