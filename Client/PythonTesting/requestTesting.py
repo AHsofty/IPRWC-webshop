@@ -102,10 +102,35 @@ def register(username, password):
     print(r.content)
 
 
-# x = register("Eren", "Hallo123")
+# --------------------------------------------------------------
 
 
-x = login("Eren", "Hallo123")
-print(x)
-# y = add_product(x)
+def add_product_v2(token):
+    url = 'http://localhost:8080/api/v2/product/create'
+    product_data = {
+        "productName": "Couch",
+        "buyPrice": 10,
+        "sellPrice": 15,
+        "quantity": 11,
+        "description": "A sick couch"
+    }
+
+    product_json = json.dumps(product_data)
+
+    file_path = 'couche.jpg'
+    files = {
+        'image': ('image.jpg', open(file_path, 'rb'), 'image/jpeg'),
+        'product': (None, product_json, 'application/json'),
+    }
+
+    headers = {'Authorization': f'Bearer {token}'}
+    response = requests.post(url, files=files, headers=headers)
+    # response = requests.post(url, files=files)
+    print(response)
+    print(response.text)
+
+
+x = login("admin", "admin")
+add_product_v2(x)
+
 

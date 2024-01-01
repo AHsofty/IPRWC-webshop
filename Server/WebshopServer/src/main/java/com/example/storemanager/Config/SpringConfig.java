@@ -60,7 +60,7 @@ public class SpringConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/v1/product/create").authenticated()
+                        .requestMatchers("/api/v1/product/create", "/api/v2/product/create").authenticated()
                         .requestMatchers("/api/v1/product/all", "/api/v1/product/{id}", "/api/v1/user/register").permitAll()
                         .anyRequest().authenticated()
                 )
