@@ -17,7 +17,6 @@ import java.util.UUID;
 @Table(name = "images")
 public class Images {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @JsonBackReference
@@ -26,4 +25,6 @@ public class Images {
     private ProductV2 product;
 
     private String imageName; // This is not the name of the image file
+
+    private String imageFileName; // This is the name of the image file
 }

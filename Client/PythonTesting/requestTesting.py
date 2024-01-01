@@ -128,9 +128,25 @@ def add_product_v2(token):
     print(response)
     print(response.text)
 
+def get_product_by_id_v2(UUID):
+    url = f'http://localhost:8080/api/v2/product/{UUID}'
+    r = requests.get(url)
+    print(r)
+    print(r.content)
+    return r 
+
+def get_image_by_id_v2(UUID):
+    url = f'http://localhost:8080/api/v2/image/{UUID}'
+    r = requests.get(url)
+    print(r)
+    print(r.content)
+    return r 
 
 
-x = login("admin", "admin")
-add_product_v2(x)
 
+# x = login("admin", "admin")
+# add_product_v2(x)
 
+# get_product_by_id_v2("8d0cea24-adc6-4466-98fa-5f0d1505460f")
+
+# get_image_by_id_v2("2d31e68a-ade1-48f0-a5dd-c5cd519ea7cc")

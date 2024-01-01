@@ -3,8 +3,10 @@ package com.example.storemanager.Dao;
 import com.example.storemanager.Repository.ImageRepository;
 import com.example.storemanager.Repository.ProductRepositoryV2;
 import com.example.storemanager.model.Images;
+import com.example.storemanager.model.Product;
 import com.example.storemanager.model.ProductV2;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +30,7 @@ public class ProductDaoV2 {
         myImage.setId(UUID.randomUUID());
         myImage.setImageName(imageName);
         myImage.setProduct(product);
+        myImage.setImageFileName("default.jpg");
 
         List<Images> images = new ArrayList<>();
         images.add(myImage);
@@ -41,7 +44,7 @@ public class ProductDaoV2 {
             Files.createDirectories(directory);
         }
 
-        Path filePath = directory.resolve("default.jpg");
+        Path filePath = directory.resolve(myImage.getImageFileName());
         Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         return productRepository.save(product);
@@ -53,5 +56,14 @@ public class ProductDaoV2 {
 
     public ProductV2 findById(UUID id) {
         return productRepository.findById(id).orElse(null);
+    }
+
+    public List<ProductV2> findAll() {
+        try {
+            return this.productRepository.findAll();
+        }
+        catch (Exception ignored) {}
+
+        return new ArrayList<>();
     }
 }

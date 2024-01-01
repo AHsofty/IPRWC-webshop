@@ -39,4 +39,21 @@ public class ProductControllerV2 {
             return new ResponseEntity<>("Product creation failed", HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping(value = "/{id}")
+    private ResponseEntity<?> getProductById(@PathVariable("id") UUID id) {
+        ProductV2 product = this.productDao.findById(id);
+
+        if (product == null) {
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(product, HttpStatus.OK);
+    }
+
+    @GetMapping()
+    private ResponseEntity<?> getAllProducts() {
+        return new ResponseEntity<>(this.productDao.findAll(), HttpStatus.OK);
+    }
+
 }
