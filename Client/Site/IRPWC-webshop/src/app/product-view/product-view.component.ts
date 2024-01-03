@@ -44,9 +44,8 @@ export class ProductViewComponent {
   private getProduct() {
     this.apiService.getProductByIdV2(this.uuid).subscribe({next:(payload) => {
         this.product = payload;
-        this.imageHandler.handleMainImage(this.product).subscribe(() => {
-          this.backgroundImageSting = this.product!!.images[0]!!.imageBase64!!;
-        });
+        this.imageHandler.handleMainImage(this.product).subscribe();
+        this.backgroundImageSting = this.product.images[0].imageUrl!!;
       }});
   }
 

@@ -4,8 +4,7 @@ export class Image {
       public productId: string,
       public imageName: string,
       public imageFileName: string,
-
-      public imageBase64?: string,
+      public imageUrl?: string,
       ) {
 
   }

@@ -20,13 +20,8 @@ export class ApiService {
     return this.http.post(`${API_URL_v2}/product/create`, formData, {responseType: 'text', observe: 'response', headers: headers});
   }
 
-
   getAllProductsV2(): Observable<ProductV2[]> {
     return this.http.get<ProductV2[]>(`${API_URL_v2}/product/all`);
-  }
-
-  getImageById(id: String): Observable<Blob> {
-    return this.http.get(`${API_URL_v2}/image/${id}`, {responseType: 'blob'});
   }
 
   getProductById(id: string): Observable<any> {
