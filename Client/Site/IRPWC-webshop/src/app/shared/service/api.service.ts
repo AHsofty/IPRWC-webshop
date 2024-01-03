@@ -20,9 +20,6 @@ export class ApiService {
     return this.http.post(`${API_URL_v2}/product/create`, formData, {responseType: 'text', observe: 'response', headers: headers});
   }
 
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${API_URL}/product/all`);
-  }
 
   getAllProductsV2(): Observable<ProductV2[]> {
     return this.http.get<ProductV2[]>(`${API_URL_v2}/product/all`);
@@ -49,6 +46,10 @@ export class ApiService {
         }).parse(data);
       })
     );
+  }
+
+  getProductByIdV2(id: string): Observable<ProductV2> {
+    return this.http.get<ProductV2>(`${API_URL_v2}/product/${id}`)
   }
 
 

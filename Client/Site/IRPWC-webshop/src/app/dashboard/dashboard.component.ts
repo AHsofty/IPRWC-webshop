@@ -34,7 +34,6 @@ export class DashboardComponent {
           for (let product of this.productsV2) {
             this.processProductImages(product);
           }
-          console.log(this.productsV2)
         }
       });
   }
