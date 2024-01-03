@@ -6,6 +6,7 @@ import {Product} from "../product.model";
 import {DomSanitizer} from '@angular/platform-browser';
 import {Image} from "../image.model";
 import {ProductV2} from "../productv2.model";
+import {ImagehandlerService} from "../imagehandler";
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,7 @@ import {ProductV2} from "../productv2.model";
 export class DashboardComponent {
   public productsV2: ProductV2[] = [];
 
-  constructor(private apiService: ApiService, private _sanitizer: DomSanitizer) {
+  constructor(private apiService: ApiService, private imageHandler: ImagehandlerService) {
   }
 
   ngOnInit() {
@@ -32,38 +33,12 @@ export class DashboardComponent {
         next: (data) => {
           this.productsV2 = data;
           for (let product of this.productsV2) {
-            this.processProductImages(product);
+            this.imageHandler.handleMainImage(product).subscribe();
           }
         }
       });
   }
 
-  processProductImages(product: ProductV2) {
-    if (product.images && Array.isArray(product.images)) {
-      for (let image of product.images) {
-        this.processImage(image);
-      }
-    }
-  }
 
-  processImage(image: Image) {
-    if (image.imageName == "main") {
-      this.apiService.getImageById(image.id)
-        .subscribe({
-          next: (blob) => {
-            this.handleImageResponse(blob, image);
-          }
-        });
-    }
-  }
-
-  handleImageResponse(blob: Blob, image: Image) {
-    let reader = new FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend = () => {
-      let base64data = reader.result;
-      image.imageBase64 = base64data as string;
-    }
-  }
 
 }

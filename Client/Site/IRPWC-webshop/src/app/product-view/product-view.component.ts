@@ -7,6 +7,8 @@ import {Subscription} from "rxjs";
 import {CartService} from "../shared/service/cart.service";
 import {ProductV2} from "../productv2.model";
 import {Image} from "../image.model";
+import {DashboardComponent} from "../dashboard/dashboard.component";
+import {ImagehandlerService} from "../imagehandler";
 
 @Component({
   selector: 'app-product-view',
@@ -23,7 +25,7 @@ export class ProductViewComponent {
 
   public backgroundImageSting: string = "";
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, cart: CartService) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private cart: CartService, private imageHandler: ImagehandlerService) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
@@ -42,37 +44,11 @@ export class ProductViewComponent {
   private getProduct() {
     this.apiService.getProductByIdV2(this.uuid).subscribe({next:(payload) => {
         this.product = payload;
-
-        this.processProductImages(this.product);
+        this.imageHandler.handleMainImage(this.product).subscribe(() => {
+          this.backgroundImageSting = this.product!!.images[0]!!.imageBase64!!;
+        });
       }});
   }
 
-  processProductImages(product: ProductV2) {
-    if (product.images && Array.isArray(product.images)) {
-      for (let image of product.images) {
-        this.processImage(image);
-      }
-    }
-  }
 
-  processImage(image: Image) {
-    if (image.imageName == "main") {
-      this.apiService.getImageById(image.id)
-        .subscribe({
-          next: (blob) => {
-            this.handleImageResponse(blob, image);
-          }
-        });
-    }
-  }
-
-  handleImageResponse(blob: Blob, image: Image) {
-    let reader = new FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend = () => {
-      let base64data = reader.result;
-      image.imageBase64 = base64data as string;
-      this.backgroundImageSting = image.imageBase64;
-    }
-  }
 }
