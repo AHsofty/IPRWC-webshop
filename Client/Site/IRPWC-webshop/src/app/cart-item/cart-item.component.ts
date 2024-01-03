@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Product} from "../product.model";
-import {ProductV2} from "../productv2.model";
 
 @Component({
   selector: 'app-cart-item',
@@ -11,7 +10,7 @@ import {ProductV2} from "../productv2.model";
   styleUrl: './cart-item.component.scss'
 })
 export class CartItemComponent {
-  @Input() product: ProductV2 | undefined;
+  @Input() product: Product | undefined;
   public imageString: string = ""
 
   ngOnInit() {

@@ -22,7 +22,7 @@ public class Images {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    private ProductV2 product;
+    private Product product;
 
     private String imageName; // This is not the name of the image file
 

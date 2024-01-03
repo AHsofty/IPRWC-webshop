@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Product} from "../product.model";
 import {ApiService} from "../shared/service/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {CartService} from "../shared/service/cart.service";
-import {ProductV2} from "../productv2.model";
-import {Image} from "../image.model";
-import {DashboardComponent} from "../dashboard/dashboard.component";
+import {Product} from "../product.model";
 import {ImagehandlerService} from "../imagehandler";
 
 @Component({
@@ -18,7 +15,7 @@ import {ImagehandlerService} from "../imagehandler";
   styleUrl: './product-view.component.scss'
 })
 export class ProductViewComponent {
-  public product: ProductV2 | undefined = undefined;
+  public product: Product | undefined = undefined;
 
   private uuid: string = "";
   private routeSub: Subscription = new Subscription();
@@ -36,14 +33,14 @@ export class ProductViewComponent {
   }
 
 
-  addToCart(product: ProductV2 | undefined) {
+  addToCart(product: Product | undefined) {
     if (product != undefined) {
       CartService.add(product);
     }
   }
 
   private getProduct() {
-    this.apiService.getProductByIdV2(this.uuid).subscribe({next:(payload) => {
+    this.apiService.getProductById(this.uuid).subscribe({next:(payload) => {
         this.product = payload;
         this.imageHandler.handleMainImage(this.product).subscribe();
         this.backgroundImageSting = this.product.images[0].imageUrl!!;

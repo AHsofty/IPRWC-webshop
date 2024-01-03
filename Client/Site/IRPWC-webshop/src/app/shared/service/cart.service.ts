@@ -1,11 +1,10 @@
 import {Injectable} from "@angular/core";
-import {Product} from "../../product.model";
 import {ApiService} from "./api.service";
-import {ProductV2} from "../../productv2.model";
+import {Product} from "../../product.model";
 
 @Injectable()
 export class CartService {
-  public static items: ProductV2[] = [];
+  public static items: Product[] = [];
 
   constructor(private apiService: ApiService) {
   }
@@ -15,18 +14,18 @@ export class CartService {
     CartService.items = JSON.parse(localStorage.getItem('cart') || '[]');
   }
 
-  getItems(): ProductV2[] {
+  getItems(): Product[] {
     return CartService.items;
   }
 
-  remove(product: ProductV2): void {
+  remove(product: Product): void {
     CartService.items.splice(CartService.items.indexOf(product), 1);
 
     localStorage.setItem('cart', JSON.stringify(CartService.items));
   }
 
 
-  static add(product: ProductV2) {
+  static add(product: Product) {
     CartService.items.push(product);
 
     localStorage.setItem('cart', JSON.stringify(CartService.items));

@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Router} from "@angular/router";
-import {Product} from "../product.model";
 
 
 @Component({
@@ -23,17 +22,6 @@ export class ItemCardComponent {
   constructor(private router: Router) {}
 
   onViewClick() {
-    let product: Product = new Product(this.productID,
-      this.productName,
-      this.productBuyPrice,
-      this.productSellPrice,
-      this.productQuantity,
-      this.productDescription,
-      this.productImage)
-    this.router.navigate(['/product', this.productID]), {
-      queryParams: {
-        product: product
-      }
-    }
+    this.router.navigate(['/product', this.productID]);
   }
 }

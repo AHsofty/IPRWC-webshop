@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ProductV2} from "./productv2.model";
+import {Product} from "./product.model";
 import {Image} from "./image.model";
 import {ApiService} from "./shared/service/api.service";
 import {forkJoin, map, Observable, of, tap} from "rxjs";
@@ -11,7 +11,7 @@ export class ImagehandlerService {
   constructor() {}
 
 
-  public handleMainImage(product: ProductV2): Observable<ProductV2> {
+  public handleMainImage(product: Product): Observable<Product> {
     if (!product.images || !Array.isArray(product.images)) {
       return of(product);
     }
@@ -28,7 +28,7 @@ export class ImagehandlerService {
 
   private processImage(image: Image): Observable<any> {
     if (image.imageName === "main") {
-      image.imageUrl = `http://localhost:8080/api/v2/image/${image.id}`;
+      image.imageUrl = `http://localhost:8080/api/v1/image/${image.id}`;
       return of(image);
     }
     return of(null);

@@ -3,9 +3,6 @@ import {CommonModule} from '@angular/common';
 import {ItemCardComponent} from "../item-card/item-card.component";
 import {ApiService} from "../shared/service/api.service";
 import {Product} from "../product.model";
-import {DomSanitizer} from '@angular/platform-browser';
-import {Image} from "../image.model";
-import {ProductV2} from "../productv2.model";
 import {ImagehandlerService} from "../imagehandler";
 
 @Component({
@@ -17,18 +14,18 @@ import {ImagehandlerService} from "../imagehandler";
 })
 
 export class DashboardComponent {
-  public productsV2: ProductV2[] = [];
+  public productsV2: Product[] = [];
 
   constructor(private apiService: ApiService, private imageHandler: ImagehandlerService) {
   }
 
   ngOnInit() {
-    this.loadProductsV2();
+    this.loadProducts();
   }
 
 
-  loadProductsV2() {
-    this.apiService.getAllProductsV2()
+  loadProducts() {
+    this.apiService.getAllProducts()
       .subscribe({
         next: (data) => {
           this.productsV2 = data;
