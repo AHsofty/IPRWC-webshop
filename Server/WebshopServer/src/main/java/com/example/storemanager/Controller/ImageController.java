@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/api/v2/image")
+@RequestMapping(value = "/api/v1/image")
 @RequiredArgsConstructor
 public class ImageController {
     private final ImageDao imageDao;
