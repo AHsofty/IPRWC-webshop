@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Product} from "../product.model";
+import {ProductV2} from "../productv2.model";
 
 @Component({
   selector: 'app-cart-item',
@@ -10,7 +11,7 @@ import {Product} from "../product.model";
   styleUrl: './cart-item.component.scss'
 })
 export class CartItemComponent {
-  @Input() product: Product | undefined;
+  @Input() product: ProductV2 | undefined;
   public imageString: string = ""
 
   ngOnInit() {
@@ -18,7 +19,7 @@ export class CartItemComponent {
   }
 
   setImageString() {
-    this.imageString = "data:image/jpg;base64," + this.product?.image;
+    this.imageString = this.product?.images[0].imageUrl!!;
     console.log(this.imageString)
   }
 

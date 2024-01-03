@@ -1,59 +1,40 @@
 import {Injectable} from "@angular/core";
 import {Product} from "../../product.model";
 import {ApiService} from "./api.service";
+import {ProductV2} from "../../productv2.model";
 
 @Injectable()
 export class CartService {
-  public static items: Product[] = [];
-  public static itemUUIDs: string[] = [];
+  public static items: ProductV2[] = [];
 
   constructor(private apiService: ApiService) {
   }
 
   loadItems() {
     CartService.items = [];
-    CartService.itemUUIDs = [];
-
-    CartService.itemUUIDs = JSON.parse(localStorage.getItem('cart') || '[]');
-    for (let uuid of CartService.itemUUIDs) {
-      this.apiService.getProductById(uuid).subscribe({next:(payload) => {
-          let product: Product = new Product(payload.id
-            , payload.productName
-            , payload.buyPrice
-            , payload.sellPrice
-            , payload.quantity
-            , payload.description
-            , payload.image);
-          CartService.items.push(product);
-        }});
-    }
-
+    CartService.items = JSON.parse(localStorage.getItem('cart') || '[]');
   }
 
-  getItems(): Product[] {
+  getItems(): ProductV2[] {
     return CartService.items;
   }
 
-  remove(product: Product): void {
+  remove(product: ProductV2): void {
     CartService.items.splice(CartService.items.indexOf(product), 1);
-    CartService.itemUUIDs.splice(CartService.itemUUIDs.indexOf(product.id), 1);
 
-    localStorage.setItem('cart', JSON.stringify(CartService.itemUUIDs));
+    localStorage.setItem('cart', JSON.stringify(CartService.items));
   }
 
-  static add(product: Product) {
-    CartService.items.push(product);
-    CartService.itemUUIDs.push(product.id)
 
-    localStorage.setItem('cart', JSON.stringify(CartService.itemUUIDs));
-    console.log(CartService.items)
+  static add(product: ProductV2) {
+    CartService.items.push(product);
+
+    localStorage.setItem('cart', JSON.stringify(CartService.items));
   }
 
   public static clear() {
     CartService.items = [];
-    CartService.itemUUIDs = [];
-
-    localStorage.setItem('cart', JSON.stringify(CartService.itemUUIDs));
+    localStorage.setItem('cart', JSON.stringify(CartService.items));
   }
 
 

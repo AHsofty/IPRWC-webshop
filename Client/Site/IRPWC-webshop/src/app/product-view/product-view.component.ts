@@ -35,7 +35,8 @@ export class ProductViewComponent {
     this.getProduct();
   }
 
-  addToCart(product: Product | undefined) {
+
+  addToCart(product: ProductV2 | undefined) {
     if (product != undefined) {
       CartService.add(product);
     }
