@@ -1,13 +1,19 @@
 package com.example.storemanager.Dao;
 
 import com.example.storemanager.Repository.ProductRepository;
+import com.example.storemanager.model.Images;
 import com.example.storemanager.model.Product;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -15,77 +21,46 @@ import java.util.UUID;
 public class ProductDao {
     private final ProductRepository productRepository;
 
-    public ResponseEntity<String> createProduct(Product product) {
-        try {
-            this.productRepository.save(product);
-            return new ResponseEntity<>("Product created successfully", HttpStatus.CREATED);
-        }
-        catch (Exception ignored) {}
+    // This is used for first time creation, not for overwriting
+    public Product saveProduct(Product product, MultipartFile image, String imageName) throws IOException {
+        Images myImage = new Images();
+        myImage.setId(UUID.randomUUID());
+        myImage.setImageName(imageName);
+        myImage.setProduct(product);
+        myImage.setImageFileName("default.jpg");
 
-        return new ResponseEntity<>("Product creation failed", HttpStatus.BAD_REQUEST);
+        List<Images> images = new ArrayList<>();
+        images.add(myImage);
+
+        product.setImages(images);
+
+        String directoryPath = "images/" + myImage.getId();
+        Path directory = Paths.get(directoryPath);
+
+        if (!Files.exists(directory)) {
+            Files.createDirectories(directory);
+        }
+
+        Path filePath = directory.resolve(myImage.getImageFileName());
+        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        return productRepository.save(product);
     }
 
-    public ArrayList<Product> getAllProducts() {
+    public Product save(Product product) {
+        return productRepository.save(product);
+    }
+
+    public Product findById(UUID id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
+    public List<Product> findAll() {
         try {
-            return (ArrayList<Product>) this.productRepository.findAll();
+            return this.productRepository.findAll();
         }
         catch (Exception ignored) {}
 
         return new ArrayList<>();
     }
-
-    public Product getProductById(String id) {
-        try {
-            return this.productRepository.findById(UUID.fromString(id)).orElse(null);
-        }
-        catch (Exception ignored) {}
-
-        return null;
-    }
-
-    public ResponseEntity<String> removeProductById(String id, String amount) {
-        Product product = this.getProductById(id);
-        int amountToRemove = Integer.parseInt(amount);
-        int productAmount = product.getQuantity();
-
-        if (amountToRemove > productAmount || amountToRemove < 0) {
-            return new ResponseEntity<>("Failed to remove items", HttpStatus.BAD_REQUEST);
-        }
-        else if (productAmount == amountToRemove) {
-            this.productRepository.deleteById(UUID.fromString(id));
-            return new ResponseEntity<>("Product removed successfully", HttpStatus.OK);
-        }
-        else {
-            product.setQuantity(productAmount - amountToRemove);
-            this.productRepository.save(product);
-            return new ResponseEntity<>("Product updates succesfully", HttpStatus.OK);
-        }
-    }
-
-    public ResponseEntity<String> addProductById(String id, String amount) {
-        Product product = this.getProductById(id);
-        int amountToAdd = Integer.parseInt(amount);
-        int productAmount = product.getQuantity();
-
-        if (amountToAdd < 0) {
-            return new ResponseEntity<>("Failed to add items", HttpStatus.BAD_REQUEST);
-        }
-        else {
-            product.setQuantity(productAmount + amountToAdd);
-            this.productRepository.save(product);
-            return new ResponseEntity<>("Product updates succesfully", HttpStatus.OK);
-        }
-    }
-
-    public ResponseEntity<String> updateProductById(Product product) {
-        try {
-            this.productRepository.save(product);
-            return new ResponseEntity<>("Product updated successfully", HttpStatus.OK);
-        }
-        catch (Exception exception) {
-            System.out.println(exception.getMessage());
-            return new ResponseEntity<>("Product update failed", HttpStatus.BAD_REQUEST);
-        }
-    }
-
 }

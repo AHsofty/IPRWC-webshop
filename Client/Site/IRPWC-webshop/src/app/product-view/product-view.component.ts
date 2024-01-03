@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Product} from "../product.model";
 import {ApiService} from "../shared/service/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {CartService} from "../shared/service/cart.service";
+import {Product} from "../product.model";
+import {ImagehandlerService} from "../imagehandler";
 
 @Component({
   selector: 'app-product-view',
@@ -21,7 +22,7 @@ export class ProductViewComponent {
 
   public backgroundImageSting: string = "";
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, cart: CartService) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private cart: CartService, private imageHandler: ImagehandlerService) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
@@ -31,27 +32,20 @@ export class ProductViewComponent {
     this.getProduct();
   }
 
-  getProduct() {
-    this.apiService.getProductById(this.uuid).subscribe({next:(payload) => {
-        this.product = new Product(payload.id
-          , payload.productName
-          , payload.buyPrice
-          , payload.sellPrice
-          , payload.quantity
-          , payload.description
-          , payload.image);
-
-        this.backgroundImageSting = "data:image/jpg;base64," + this.product?.image;
-
-      }});
-
-  }
-
-  protected readonly undefined = undefined;
 
   addToCart(product: Product | undefined) {
     if (product != undefined) {
       CartService.add(product);
     }
   }
+
+  private getProduct() {
+    this.apiService.getProductById(this.uuid).subscribe({next:(payload) => {
+        this.product = payload;
+        this.imageHandler.handleMainImage(this.product).subscribe();
+        this.backgroundImageSting = this.product.images[0].imageUrl!!;
+      }});
+  }
+
+
 }

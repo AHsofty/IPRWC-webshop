@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ItemCardComponent} from "../item-card/item-card.component";
 import {ApiService} from "../shared/service/api.service";
 import {Product} from "../product.model";
-import {DomSanitizer} from '@angular/platform-browser';
+import {ImagehandlerService} from "../imagehandler";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,30 +14,28 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 
 export class DashboardComponent {
-  public products: Product[] = [];
+  public productsV2: Product[] = [];
 
-  constructor(private apiService: ApiService, private _sanitizer: DomSanitizer) {
+  constructor(private apiService: ApiService, private imageHandler: ImagehandlerService) {
   }
 
   ngOnInit() {
     this.loadProducts();
   }
 
+
   loadProducts() {
     this.apiService.getAllProducts()
       .subscribe({
         next: (data) => {
-          this.products = data;
-
-          let localProducts: Product[] = [];
-          for (let product of this.products) {
-            product.image = ('data:image/jpg;base64,' + product.image);
-            localProducts.push(product);
+          this.productsV2 = data;
+          for (let product of this.productsV2) {
+            this.imageHandler.handleMainImage(product).subscribe();
           }
-
-          this.products = localProducts;
         }
       });
   }
+
+
 
 }

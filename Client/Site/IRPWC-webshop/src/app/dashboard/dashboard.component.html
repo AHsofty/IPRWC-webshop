@@ -7,11 +7,11 @@
   </div>
 
   <div class="items">
-    <app-item-card *ngFor="let item of products"
+    <app-item-card *ngFor="let item of productsV2"
                    [productName]="item.productName"
                    [productBuyPrice]="item.buyPrice"
                    [productSellPrice]="item.sellPrice"
-                   [productImage]="item.image"
+                   [productImage]="item.images[0].imageUrl!!"
                    [productDescription]="item.description"
                    [productID]="item.id"
                    [productQuantity]="item.quantity"

@@ -102,10 +102,59 @@ def register(username, password):
     print(r.content)
 
 
-# x = register("Eren", "Hallo123")
+# --------------------------------------------------------------
 
 
-x = login("Eren", "Hallo123")
-print(x)
-# y = add_product(x)
+def add_product_v2(token):
+    url = 'http://localhost:8080/api/v2/product/create'
+    product_data = {
+        "productName": "Couch",
+        "buyPrice": 10,
+        "sellPrice": 15,
+        "quantity": 11,
+        "description": "A sick couch"
+    }
 
+    product_json = json.dumps(product_data)
+
+    file_path = 'couche.jpg'
+    files = {
+        'image': ('image.jpg', open(file_path, 'rb'), 'image/jpeg'),
+        'product': (None, product_json, 'application/json'),
+    }
+
+    headers = {'Authorization': f'Bearer {token}'}
+    response = requests.post(url, files=files, headers=headers)
+    print(response)
+    print(response.text)
+
+def get_product_by_id_v2(UUID):
+    url = f'http://localhost:8080/api/v2/product/{UUID}'
+    r = requests.get(url)
+    print(r)
+    print(r.content)
+    return r 
+
+def get_image_by_id_v2(UUID):
+    url = f'http://localhost:8080/api/v2/image/{UUID}'
+    r = requests.get(url)
+    print(r)
+    print(r.content)
+    return r 
+
+def get_all_products_v2():
+    url = 'http://localhost:8080/api/v2/product/all'
+    r = requests.get(url)	
+    print(r)
+    print(r.content)
+     
+
+
+# x = login("admin", "admin")
+# add_product_v2(x)
+
+# get_product_by_id_v2("8d0cea24-adc6-4466-98fa-5f0d1505460f")
+
+# get_image_by_id_v2("2d31e68a-ade1-48f0-a5dd-c5cd519ea7cc")
+
+get_all_products_v2()

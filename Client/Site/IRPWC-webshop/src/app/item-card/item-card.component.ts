@@ -22,6 +22,6 @@ export class ItemCardComponent {
   constructor(private router: Router) {}
 
   onViewClick() {
-    this.router.navigate(['/product', this.productID])
+    this.router.navigate(['/product', this.productID]);
   }
 }

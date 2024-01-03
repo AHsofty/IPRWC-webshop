@@ -1,4 +1,4 @@
-import {SafeResourceUrl} from "@angular/platform-browser";
+import {Image} from "./image.model";
 
 export class Product {
   constructor(
@@ -8,6 +8,8 @@ export class Product {
     public sellPrice: number,
     public quantity: number,
     public description: string,
-    public image: string,
+    public images: Image[],
+
+    public mainImageIndex?: number
   ) {}
 }

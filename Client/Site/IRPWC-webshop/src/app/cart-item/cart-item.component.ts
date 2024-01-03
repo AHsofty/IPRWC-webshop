@@ -18,7 +18,7 @@ export class CartItemComponent {
   }
 
   setImageString() {
-    this.imageString = "data:image/jpg;base64," + this.product?.image;
+    this.imageString = this.product?.images[0].imageUrl!!;
     console.log(this.imageString)
   }
 
