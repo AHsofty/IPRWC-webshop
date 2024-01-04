@@ -44,4 +44,13 @@ public class AuthenticationService {
         User user = userDAO.loadUserByUsername(username);
         return jwtService.generateToken(Map.of("role", user.getRole()), user.getId());
     }
+
+    public boolean isValidToken(String token) {
+        try {
+            jwtService.validateToken(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

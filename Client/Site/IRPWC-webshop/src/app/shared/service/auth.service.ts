@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class AuthService {
-  constructor() {}
+  constructor(private toastr: ToastrService, private router: Router, private http: HttpClient) {}
 
   parseToken = (token: string) => {
     const base64Url = token.split('.')[1];
@@ -33,9 +36,45 @@ export class AuthService {
     sessionStorage.setItem('token', token);
   }
 
-  // Krijgt je JWT auth token
   public getToken() {
     return sessionStorage.getItem('token');
+  }
+
+  public validateToken(): void {
+    let isValid = false;
+    const token = sessionStorage.getItem('token');
+    if (!token) return;
+
+    this.http.get(`http://localhost:8080/api/v1/auth/validate/${token}`, {observe: 'response', responseType : 'text'}).subscribe(
+      response => {
+        const responseBody = response.body ? response.body.toString() : '';
+        console.log("body is: " + responseBody)
+        if (responseBody.includes('invalid')) {
+          isValid = false;
+        }
+        else if (responseBody.includes("valid")) {
+          isValid = true;
+        }
+        else {
+          isValid = false;
+        }
+
+        if (!isValid) {
+          sessionStorage.removeItem('token');
+          this.toastr.error('Your session has expired or is invalid. Please log in again.', 'Session Expired');
+          this.router.navigate(['/login']);
+        }
+        else {
+          console.log("Token is valid!")
+        }
+
+      },
+    );
+
+
+
+
+
   }
 
 }

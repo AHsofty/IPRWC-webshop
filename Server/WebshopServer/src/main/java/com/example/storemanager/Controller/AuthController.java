@@ -6,10 +6,7 @@ import com.example.storemanager.dto.AuthRequestDTO;
 import com.example.storemanager.dto.AuthResponseDTO;
 import com.example.storemanager.model.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/v1/auth")
@@ -22,5 +19,11 @@ public class AuthController {
         String token = authenticationService.login(loginDTO.getUsername(), loginDTO.getPassword());
 
         return new ApiResponse<>(new AuthResponseDTO(token));
+    }
+
+    @GetMapping(value = "/validate/{token}")
+    public ApiResponse<String> validate(@PathVariable String token) {
+        boolean isValid = authenticationService.isValidToken(token);
+        return new ApiResponse<>(isValid ? "valid" : "invalid");
     }
 }

@@ -18,6 +18,7 @@ export class AppLayoutComponent {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.authService.validateToken();
     this.isAdmin = this.authService.isAdmin();
   }
 
