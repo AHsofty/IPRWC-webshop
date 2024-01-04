@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Product} from "./product.model";
-import {Image} from "./image.model";
-import {ApiService} from "./shared/service/api.service";
+import {Product} from "../../product.model";
+import {Image} from "../../image.model";
+import {ApiService} from "./api.service";
 import {forkJoin, map, Observable, of, tap} from "rxjs";
 
 @Injectable({

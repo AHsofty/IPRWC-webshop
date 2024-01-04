@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ItemCardComponent} from "../item-card/item-card.component";
 import {ApiService} from "../shared/service/api.service";
 import {Product} from "../product.model";
-import {ImagehandlerService} from "../imagehandler";
+import {ImagehandlerService} from "../shared/service/imagehandler";
 
 @Component({
   selector: 'app-dashboard',

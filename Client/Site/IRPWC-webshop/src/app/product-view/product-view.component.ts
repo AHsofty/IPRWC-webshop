@@ -5,7 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {CartService} from "../shared/service/cart.service";
 import {Product} from "../product.model";
-import {ImagehandlerService} from "../imagehandler";
+import {ImagehandlerService} from "../shared/service/imagehandler";
 
 @Component({
   selector: 'app-product-view',
