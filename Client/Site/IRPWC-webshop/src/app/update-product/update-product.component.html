@@ -1,0 +1,26 @@
+<div class="page_container">
+  <h1>Edit product with id {{product?.id}}</h1>
+
+  <div>
+    <form class="page_container_form">
+      <label for="pname">Product name</label>
+      <input type="text" id="pname" name="pname" [(ngModel)]="productName" placeholder="Product name...">
+
+      <label for="bprice">Buy price</label>
+      <input type="text" id="bprice" name="bprice" [(ngModel)]="buyPrice" placeholder="Product buy price">
+
+      <label for="sprice">Sell price</label>
+      <input type="text" id="sprice" name="sprice" [(ngModel)]="sellPrice" placeholder="Product sell price">
+
+      <label for="quantity">Product quantity</label>
+      <input type="text" id="quantity" name="quantity" [(ngModel)]="quantity" placeholder="Product quantity">
+
+      <label for="description">Description</label>
+      <input type="text" id="description" name="description" [(ngModel)]="description" placeholder="Description of the product">
+
+      <input type="file" id="docpicker" name="docpicker" accept=".jpg,.jpeg,.png" [(ngModel)]="image" #docpicker/>
+
+      <input type="button" value="Submit" (click)="onSubmitClick()">
+    </form>
+  </div>
+</div>

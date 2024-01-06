@@ -18,6 +18,12 @@ export class ApiService {
     return this.http.post(`${API_URL}/product/create`, formData, {responseType: 'text', observe: 'response', headers: headers});
   }
 
+  editProduct(formData: FormData): Observable<any> {
+    let token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put(`${API_URL}/product/update`, formData, {responseType: 'text', observe: 'response', headers: headers});
+  }
+
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${API_URL}/product/all`);
   }

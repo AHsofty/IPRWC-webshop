@@ -50,4 +50,19 @@ public class ProductController {
         return new ResponseEntity<>(this.productDao.findAll(), HttpStatus.OK);
     }
 
+    @Secured({"SUPERADMIN"})
+    @PutMapping(value = "/update")
+    private ResponseEntity<?> updateProduct(@RequestParam("product") String productStr, @RequestParam("image") MultipartFile imageFile) {
+        try {
+            Product product = new ObjectMapper().readValue(productStr, Product.class);
+            return new ResponseEntity<>(this.productDao.updateProduct(product, imageFile, "main"), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Product update failed", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+
 }

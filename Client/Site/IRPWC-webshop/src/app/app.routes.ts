@@ -11,6 +11,7 @@ import {authGuard} from "./shared/guard/auth.guard";
 import {RegisterComponent} from "./register/register.component";
 import {adminGuard} from "./shared/guard/admin.guard";
 import {LogoutComponent} from "./logout/logout.component";
+import {UpdateProductComponent} from "./update-product/update-product.component";
 
 
 export const routes: Routes = [
@@ -54,8 +55,12 @@ export const routes: Routes = [
         path: 'logout',
         component: LogoutComponent,
         canActivate: [authGuard],
+      },
+      {
+        path: 'product/edit/:id',
+        component: UpdateProductComponent,
+        canActivate: [adminGuard],
       }
-
     ],
   },
 ];

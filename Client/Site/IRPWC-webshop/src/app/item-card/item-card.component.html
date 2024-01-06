@@ -3,4 +3,5 @@
   <h3>{{productName}}</h3>
   <p>{{productBuyPrice}}$</p>
   <button class="btn" (click)="onViewClick()">View product</button>
+  <button *ngIf="isAdmin" class="btn" (click)="onEditClick()">Edit product</button>
 </div>

@@ -63,4 +63,41 @@ public class ProductDao {
 
         return new ArrayList<>();
     }
+
+    public Product updateProduct(Product product, MultipartFile imageFile, String main) throws IOException {
+        // Check if the product exists in the database
+        Product existingProduct = productRepository.findById(product.getId()).orElse(null);
+
+        if (existingProduct == null) {
+            throw new IllegalArgumentException("Product not found");
+        }
+
+        // Update the image, we do this by deleting the old image and creating a new one
+        if (!existingProduct.getImages().isEmpty()) {
+            Images oldImage = existingProduct.getImages().getFirst(); // This is hardcoding, but it's fine for now
+            Path oldImagePath = Paths.get("images/" + oldImage.getId(), oldImage.getImageFileName());
+            Files.deleteIfExists(oldImagePath);
+        }
+
+        // Create a new image
+        Images newImage = new Images();
+        newImage.setId(existingProduct.getImages().getFirst().getId()); // This is hardcoding, but it's fine for now
+        newImage.setImageName(main);
+        newImage.setProduct(existingProduct);
+        newImage.setImageFileName("default.jpg");
+        product.setImages(List.of(newImage));
+
+        // Save the new image
+        String directoryPath = "images/" + newImage.getId();
+        Path directory = Paths.get(directoryPath);
+
+        if (!Files.exists(directory)) {
+            Files.createDirectories(directory);
+        }
+
+        Path filePath = directory.resolve(newImage.getImageFileName());
+        Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        return productRepository.save(product);
+    }
 }
