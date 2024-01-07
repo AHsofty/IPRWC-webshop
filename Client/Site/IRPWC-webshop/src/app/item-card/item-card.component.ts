@@ -23,7 +23,7 @@ export class ItemCardComponent {
   @Input() productQuantity: number = 0;
   public isAdmin: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private apiService: ApiService) {
     this.isAdmin = this.authService.isAdmin();
   }
 
@@ -33,5 +33,11 @@ export class ItemCardComponent {
 
   onEditClick() {
     this.router.navigate(['/product/edit', this.productID]);
+  }
+
+  onRemoveClick() {
+    this.apiService.deleteProductById(this.productID).subscribe((data) => {
+      window.location.reload();
+    });
   }
 }

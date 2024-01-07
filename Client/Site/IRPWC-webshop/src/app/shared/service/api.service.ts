@@ -64,6 +64,12 @@ export class ApiService {
       }),
     );
   }
+
+  deleteProductById(id: string): Observable<any> {
+    let token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(`${API_URL}/product/delete/${id}`, {responseType: 'text', observe: 'response', headers: headers});
+  }
 }
 
 
