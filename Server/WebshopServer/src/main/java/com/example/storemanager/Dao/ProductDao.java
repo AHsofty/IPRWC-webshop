@@ -74,14 +74,14 @@ public class ProductDao {
 
         // Update the image, we do this by deleting the old image and creating a new one
         if (!existingProduct.getImages().isEmpty()) {
-            Images oldImage = existingProduct.getImages().getFirst(); // This is hardcoding, but it's fine for now
+            Images oldImage = existingProduct.getImages().get(0); // This is hardcoding, but it's fine for now
             Path oldImagePath = Paths.get("images/" + oldImage.getId(), oldImage.getImageFileName());
             Files.deleteIfExists(oldImagePath);
         }
 
         // Create a new image
         Images newImage = new Images();
-        newImage.setId(existingProduct.getImages().getFirst().getId()); // This is hardcoding, but it's fine for now
+        newImage.setId(existingProduct.getImages().get(0).getId()); // This is hardcoding, but it's fine for now
         newImage.setImageName(main);
         newImage.setProduct(existingProduct);
         newImage.setImageFileName("default.jpg");
