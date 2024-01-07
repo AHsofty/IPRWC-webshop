@@ -5,7 +5,12 @@
     </app-cart-item>
   </div>
 
-  <div class="buy_button">
-    <button class="btn" (click)="CartService.clear()">Clear all items</button>
+
+  <div class="right_side">
+    <p>Total price: ${{total_price}}</p>
+    <button>BUY</button>
+    <div class="clear_button">
+      <button class="btn" (click)="CartService.clear()">Clear all items</button>
+    </div>
   </div>
 </div>

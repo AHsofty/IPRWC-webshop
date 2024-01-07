@@ -37,4 +37,11 @@ export class CartService {
   }
 
 
+  getTotalPrice() {
+    let total = 0
+    for (let item of CartService.items) {
+      total += item.buyPrice;
+    }
+    return total
+  }
 }

@@ -11,12 +11,15 @@ import {CartService} from "../shared/service/cart.service";
   styleUrl: './cart.component.scss'
 })
 export class CartComponent implements OnInit {
+  protected readonly CartService = CartService;
+  total_price: number = 0;
 
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
     this.cartService.loadItems();
+    this.total_price = this.cartService.getTotalPrice();
   }
 
-  protected readonly CartService = CartService;
+
 }

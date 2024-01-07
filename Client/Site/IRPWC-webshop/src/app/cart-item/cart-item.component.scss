@@ -23,7 +23,11 @@
   width: 50%;
   padding: 10px;
   border: 2px solid black;
+  flex-direction: column;
 
+  p {
+    margin: 5px 0;
+  }
 
 }
 

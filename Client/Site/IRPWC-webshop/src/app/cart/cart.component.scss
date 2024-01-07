@@ -3,12 +3,33 @@
   height: 100%;
   justify-content: space-between;
   padding: 20px;
+  flex-direction: row;
+  align-items: flex-end;
 
   .lef_side {
     border: 1px solid black;
-    width: 1000px;
+    width: 800px;
     margin-top: 70px;
     height: auto;
   }
 
+  .right_side {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      width: 200px;
+    }
+
+  }
 }
