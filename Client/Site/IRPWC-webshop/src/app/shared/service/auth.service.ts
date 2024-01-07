@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
+import {ApiService} from "./api.service";
 
 @Injectable()
 export class AuthService {
@@ -45,7 +46,7 @@ export class AuthService {
     const token = sessionStorage.getItem('token');
     if (!token) return;
 
-    this.http.get(`http://localhost:8080/api/v1/auth/validate/${token}`, {observe: 'response', responseType : 'text'}).subscribe(
+    this.http.get(ApiService.API_URL + `/auth/validate/${token}`, {observe: 'response', responseType : 'text'}).subscribe(
       response => {
         const responseBody = response.body ? response.body.toString() : '';
         console.log("body is: " + responseBody)

@@ -28,7 +28,7 @@ export class ImagehandlerService {
 
   private processImage(image: Image): Observable<any> {
     if (image.imageName === "main") {
-      image.imageUrl = `http://localhost:8080/api/v1/image/${image.id}`;
+      image.imageUrl = ApiService.API_URL + `/image/${image.id}`;
       return of(image);
     }
     return of(null);
