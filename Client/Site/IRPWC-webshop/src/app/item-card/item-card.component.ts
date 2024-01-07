@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {ApiService} from "../shared/service/api.service";
 import {AuthService} from "../shared/service/auth.service";
 import {Product} from "../product.model";
+import {AdminOption} from "../navbar-admin/navbar-admin.component";
 
 
 @Component({
@@ -40,4 +41,6 @@ export class ItemCardComponent {
       window.location.reload();
     });
   }
+
+  protected readonly AdminOption = AdminOption;
 }

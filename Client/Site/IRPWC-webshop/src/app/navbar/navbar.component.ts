@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
+import {AdminOption} from "../navbar-admin/navbar-admin.component";
 
 @Component({
   selector: 'app-navbar',
@@ -10,4 +11,14 @@ import { LucideAngularModule } from 'lucide-angular';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  constructor(private router: Router) {
+
+  }
+
+
+  onDashboardClick() {
+    AdminOption.reset();
+    this.router.navigate(['/dashboard']);
+  }
+}

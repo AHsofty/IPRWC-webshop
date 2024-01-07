@@ -63,6 +63,19 @@ public class ProductController {
         }
     }
 
+    @DeleteMapping(value = "/delete/{id}")
+    private ResponseEntity<?> removeProduct(@PathVariable("id") UUID id) {
+        Product product = this.productDao.findById(id);
+
+        if (product == null) {
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+        }
+
+        this.productDao.removeProduct(product);
+
+        return new ResponseEntity<>("Product removed", HttpStatus.OK);
+    }
+
 
 
 }

@@ -4,6 +4,9 @@ import {ItemCardComponent} from "../item-card/item-card.component";
 import {ApiService} from "../shared/service/api.service";
 import {Product} from "../product.model";
 import {ImagehandlerService} from "../shared/service/imagehandler";
+import {Subscription} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
+import {AdminOption} from "../navbar-admin/navbar-admin.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +18,6 @@ import {ImagehandlerService} from "../shared/service/imagehandler";
 
 export class DashboardComponent {
   public productsV2: Product[] = [];
-
   constructor(private apiService: ApiService, private imageHandler: ImagehandlerService) {
   }
 

@@ -100,4 +100,8 @@ public class ProductDao {
 
         return productRepository.save(product);
     }
+
+    public void removeProduct(Product product) {
+        productRepository.delete(product);
+    }
 }
