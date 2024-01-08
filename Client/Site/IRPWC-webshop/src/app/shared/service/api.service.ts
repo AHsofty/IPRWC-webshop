@@ -9,7 +9,9 @@ import {Product} from "../../product.model";
 
 @Injectable()
 export class ApiService {
-  public static API_URL = 'https://localhost:8080/api/v1';
+  // public static API_URL = 'https://erenbasaran.nl:8080/api/v1';
+  public static API_URL = 'http://localhost:8080/api/v1';
+
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
