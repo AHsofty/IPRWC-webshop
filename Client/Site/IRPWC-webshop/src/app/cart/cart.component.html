@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="lef_side">
+  <div class="lef_side" [ngClass]="{'no-border': CartService.items.length === 0}">
     <app-cart-item *ngFor="let item of CartService.items"
                    [product]="item">
     </app-cart-item>
