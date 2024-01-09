@@ -1,7 +1,7 @@
 <div class="product-card">
   <img src="{{productImage}}" alt="Product Image">
   <h3>{{productName}}</h3>
-  <p>{{productBuyPrice}}$</p>
+  <p>{{productSellPrice}}$</p>
   <button class="btn" (click)="onViewClick()">View product</button>
   <button *ngIf="AdminOption.isEdit && isAdmin" class="btn" (click)="onEditClick()">Edit product</button>
   <button *ngIf="AdminOption.isDelete && isAdmin" class="btn" (click)="onRemoveClick()">Remove product completely</button>
