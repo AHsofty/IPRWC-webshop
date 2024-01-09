@@ -2,9 +2,17 @@
   <div class="image_container">
     <img src="{{backgroundImageSting}}" alt="Image of the product">
   </div>
-  <div class="text">
-    <p>{{product?.productName}} - ${{product?.sellPrice}}</p>
+  <div class="buy_menu">
+    <h2>{{product?.productName}}</h2>
     <p>{{product?.description}}</p>
+    <div class="price_container">
+      <span class="price">€{{product?.sellPrice}}</span>
+    </div>
+    <div class="quantity_container">
+      <button class="quantity_btn" (click)="remove()">-</button>
+      <input type="text" class="quantity_input" value="{{quantity}}">
+      <button class="quantity_btn" (click)="add()">+</button>
+    </div>
+    <button class="add_to_cart" (click)="addToCart(product)">Add to cart</button>
   </div>
-  <button (click)="addToCart(product)">Add to cart</button>
 </div>

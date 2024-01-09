@@ -6,6 +6,7 @@ import {Subscription} from "rxjs";
 import {CartService} from "../shared/service/cart.service";
 import {Product} from "../product.model";
 import {ImagehandlerService} from "../shared/service/imagehandler";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-product-view',
@@ -16,17 +17,16 @@ import {ImagehandlerService} from "../shared/service/imagehandler";
 })
 export class ProductViewComponent {
   public product: Product | undefined = undefined;
-
   private uuid: string = "";
   private routeSub: Subscription = new Subscription();
-
   public backgroundImageSting: string = "";
+  public quantity: number = 0;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private cart: CartService, private imageHandler: ImagehandlerService) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private cart: CartService, private imageHandler: ImagehandlerService, private toasr: ToastrService) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
-      this.uuid = params['id']; // Save the UUID from the URL
+      this.uuid = params['id'];
     });
 
     this.getProduct();
@@ -34,8 +34,12 @@ export class ProductViewComponent {
 
 
   addToCart(product: Product | undefined) {
-    if (product != undefined) {
-      CartService.add(product);
+    if (product != undefined && this.quantity > 0) {
+      for (let i = 0; i < this.quantity; i++) {
+        CartService.add(product);
+      }
+      this.toasr.success("Succesfully added item(s) to cart", "Success");
+      this.quantity = 0;
     }
   }
 
@@ -48,4 +52,13 @@ export class ProductViewComponent {
   }
 
 
+  add() {
+      this.quantity++;
+  }
+
+  remove() {
+    if (this.quantity > 0) {
+      this.quantity--;
+    }
+  }
 }
