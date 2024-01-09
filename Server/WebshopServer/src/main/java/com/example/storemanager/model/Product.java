@@ -25,6 +25,7 @@ public class Product {
     private float buyPrice;
     private float sellPrice;
     private int quantity;
+    @Column(columnDefinition="TEXT")
     private String description;
 
     @JsonManagedReference
