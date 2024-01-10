@@ -22,4 +22,8 @@ export class CartComponent implements OnInit {
   }
 
 
+  clear() {
+    this.total_price = 0;
+    CartService.clear();
+  }
 }
