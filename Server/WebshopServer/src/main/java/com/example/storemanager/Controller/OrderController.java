@@ -26,17 +26,23 @@ public class OrderController {
     private final JwtService jwtService;
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestHeader("Authorization") String token, @RequestBody List<UUID> productIds) {
-        String userId = jwtService.extractUserId(token.substring(7));
-        User user = userDAO.findById(UUID.fromString(userId)).orElseThrow();
-        List<Product> products = productIds.stream()
-                .map(productDAO::findById)
-                .collect(Collectors.toList());
-        Order order = Order.builder()
-                .customer(user)
-                .products(products)
-                .build();
-        Order savedOrder = orderDAO.save(order);
-        return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
+    public ResponseEntity<?> createOrder(@RequestHeader("Authorization") String token, @RequestBody List<UUID> productIds) {
+        try {
+            String userId = jwtService.extractUserId(token.substring(7));
+            User user = userDAO.findById(UUID.fromString(userId)).orElseThrow();
+            List<Product> products = productIds.stream()
+                    .map(productDAO::findById)
+                    .collect(Collectors.toList());
+            Order order = Order.builder()
+                    .customer(user)
+                    .products(products)
+                    .build();
+            Order savedOrder = orderDAO.save(order);
+            return new ResponseEntity<>("Successfully created an order", HttpStatus.CREATED);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>("Order creation failed", HttpStatus.BAD_REQUEST);
+        }
+
     }
 }
