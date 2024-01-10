@@ -71,11 +71,11 @@ export class AuthService {
 
       },
     );
+  }
 
-
-
-
-
+  public isLoggedIn(): boolean {
+    const token = sessionStorage.getItem('token');
+    return !!token;
   }
 
 }

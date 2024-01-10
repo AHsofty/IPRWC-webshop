@@ -3,9 +3,9 @@
     <ul class="nav__list">
       <li class="nav__item" (click)="onDashboardClick()">Home</li>
       <li class="nav__item"><a routerLink="/cart">Shopping cart</a></li>
-      <li class="nav__item"><a routerLink="/login">Login</a></li>
-      <li class="nav__item"><a routerLink="/register">Register</a></li>
-      <li class="nav__item"><a routerLink="/logout">Log out</a></li>
+      <li class="nav__item" *ngIf="!authService.isLoggedIn()"><a routerLink="/login">Login</a></li>
+      <li class="nav__item" *ngIf="!authService.isLoggedIn()"><a routerLink="/register">Register</a></li>
+      <li class="nav__item" *ngIf="authService.isLoggedIn()"><a routerLink="/logout">Log out</a></li>
     </ul>
   </nav>
 </div>

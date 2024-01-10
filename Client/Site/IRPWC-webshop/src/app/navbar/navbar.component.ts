@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {Router, RouterModule} from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import {AdminOption} from "../navbar-admin/navbar-admin.component";
+import {AuthService} from "../shared/service/auth.service";
 
 @Component({
   selector: 'app-navbar',
@@ -12,8 +13,7 @@ import {AdminOption} from "../navbar-admin/navbar-admin.component";
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  constructor(private router: Router) {
-
+  constructor(private router: Router, public authService: AuthService) {
   }
 
 
