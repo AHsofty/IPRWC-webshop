@@ -73,6 +73,11 @@ export class ApiService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete(`${ApiService.API_URL}/product/delete/${id}`, {responseType: 'text', observe: 'response', headers: headers});
   }
+
+  makeOrder(userJwt: string, payload: string[]) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${userJwt}`);
+    return this.http.post(`${(ApiService.API_URL)}/orders`, payload, {responseType: 'text', observe: 'response', headers: headers});
+  }
 }
 
 
