@@ -65,6 +65,11 @@ export class UpdateProductComponent {
       description: this.description,
     }
 
+    if (isNaN(this.buyPrice) || isNaN(this.sellPrice) || isNaN(this.quantity)) {
+      this.toastr.error("Buy price, sell price and quantity must be numbers", "Failed to create product", {timeOut : 2500})
+      return
+    }
+
     const formData = new FormData();
     const fileInput = this.docpicker.nativeElement;
     const file = fileInput.files[0];
