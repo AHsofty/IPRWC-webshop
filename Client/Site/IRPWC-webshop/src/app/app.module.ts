@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import {CartService} from "./shared/service/cart.service";
 import {AuthService} from "./shared/service/auth.service";
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +34,12 @@ import {AuthService} from "./shared/service/auth.service";
     ToastrModule.forRoot(),
     HttpClientModule,
   ],
-  providers: [HttpClientModule, ApiService, CartService, AuthService],
-  bootstrap: [AppComponent],
+  providers: [
+    HttpClientModule,
+    ApiService,
+    CartService,
+    AuthService,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],  bootstrap: [AppComponent],
 })
 export class AppModule {}
